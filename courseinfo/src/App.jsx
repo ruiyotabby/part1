@@ -21,8 +21,6 @@ const App = () => {
     <div>
       <Header course={course} />
       <Content course={course} />
-      {/* <Content part={part2} exercise={exercises2} />
-      <Content part={part3} exercise={exercises3} /> */}
       <Total course={course} />
     </div>
   )
@@ -51,14 +49,17 @@ const Part = (props) => {
 }
 
 const Total = (props) => {
-  return (
-    props.total.map((el) => (
-       <p>{el.exercises}</p>
-    ))
+  const arr = [];
+  props.course.parts.forEach(element => {
+       arr.push(element.exercises)
+    })
 
-    // <p>
-    //   Number of exercises {props.total}
-    // </p>
+    const total = arr.reduce((accumulator, currentValue) => accumulator + currentValue);
+
+  return (
+    <p>
+      Number of exercises: {total}
+    </p>
   )
 }
 
