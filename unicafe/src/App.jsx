@@ -1,4 +1,3 @@
-import './App.css';
 import { useState } from 'react'
 
 function App() {
@@ -17,6 +16,7 @@ function App() {
   const addBad = () => {
     setBad(bad + 1);
   }
+  const total = good + bad + neutral
 
   return (
     <div className="App">
@@ -25,15 +25,36 @@ function App() {
         <Button handleClick={addNeutral} text='Neutral' />
         <Button handleClick={addBad} text='Bad' />
         <Header text='Statistics' />
-        <Display text='Good' count={good} />
-        <Display text='Neutral' count={neutral} />
-        <Display text='Bad' count={bad} />
+        <Statistics count={total} stat={[good, neutral, bad]} />
     </div>
   );
 }
 
-const Display = ({text, count}) => (
-  <p>{text}: {count}</p>
+const Statistics = ({count, stat}) => {
+  if (count === 0) {
+    return ( <p>No feedback given</p> )
+  }
+  return (
+    <div>
+      <table>
+        <tbody>
+          <StatisticLine text='Good' count={stat[0]} />
+          <StatisticLine text='Neutral' count={stat[1]} />
+          <StatisticLine text='Bad' count={stat[2]} />
+          <StatisticLine text='All' count={count} />
+          <StatisticLine text='Average' count={count/3} />
+          <StatisticLine text='Positive' count={((stat[1] * 100) /count)} />
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+const StatisticLine = ({text, count}) => (
+    <tr>
+      <td>{text}</td> 
+      <td>{count}</td>
+    </tr>
 )
 
 const Header = ({text}) => <h1>{text}</h1> 
