@@ -21,9 +21,9 @@ function App() {
   return (
     <div className="App">
         <h1>give feedback</h1>
-        <button onClick={addGood} >Good</button>
-        <button onClick={addNeutral}>Neutral</button>
-        <button onClick={addBad}>Bad</button>
+        <Button handleClick={addGood} text='Good' />
+        <Button handleClick={addNeutral} text='Neutral' />
+        <Button handleClick={addBad} text='Bad' />
         <h1>statistics</h1>
         <p>Good: {good}</p>
         <p>Neutral: {neutral}</p>
@@ -31,5 +31,9 @@ function App() {
     </div>
   );
 }
+
+const Button = ({handleClick, text}) => (
+  <button onClick={handleClick} >{text}</button>
+)
 
 export default App;
