@@ -20,17 +20,23 @@ function App() {
 
   return (
     <div className="App">
-        <h1>give feedback</h1>
+        <Header text='Give feedback' />
         <Button handleClick={addGood} text='Good' />
         <Button handleClick={addNeutral} text='Neutral' />
         <Button handleClick={addBad} text='Bad' />
-        <h1>statistics</h1>
-        <p>Good: {good}</p>
-        <p>Neutral: {neutral}</p>
-        <p>Bad: {bad}</p>
+        <Header text='Statistics' />
+        <Display text='Good' count={good} />
+        <Display text='Neutral' count={neutral} />
+        <Display text='Bad' count={bad} />
     </div>
   );
 }
+
+const Display = ({text, count}) => (
+  <p>{text}: {count}</p>
+)
+
+const Header = ({text}) => <h1>{text}</h1> 
 
 const Button = ({handleClick, text}) => (
   <button onClick={handleClick} >{text}</button>
